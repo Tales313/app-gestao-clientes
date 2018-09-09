@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from decouple import config
-from dj_database_url import parse_as_dburl
+from dj_database_url import parse as db_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +27,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['app-gestao-clientes.herokuapp.com/']
+ALLOWED_HOSTS = [
+    'app-gestao-clientes.herokuapp.com/',
+]
 
 
 # Application definition
@@ -80,7 +82,7 @@ WSGI_APPLICATION = 'gestao_clientes.wsgi.application'
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
 DATABASES = {
-    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+    'default': config('DATABASE_URL', default=default_dburl, cast=db_url),
 }
 
 # Password validation
