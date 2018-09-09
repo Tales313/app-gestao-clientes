@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
-    'app-gestao-clientes.herokuapp.com/',
+    'app-gestao-clientes.herokuapp.com',
 ]
 
 
