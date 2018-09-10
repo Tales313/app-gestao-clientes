@@ -1,28 +1,33 @@
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <a href="{% url 'logout' %}">Sair</a>
+{% block title %} Administracao {% endblock %}
 
-    <ul>
-         {% for p in persons %}
+{% block main %}
 
-        <li>
-            <a href="{% url 'persons_update' p.id %}">{{ p.first_name }}</a>
-            <a href="{% url 'persons_delete' p.id %}">Deletar</a>
-        </li>
+    <div class="row">
+        <div class="col">
 
-         {% endfor %}
-    </ul>
-    <br>
-    <a href="{% url 'person_new' %}">Novo Cliente</a>
+        </div>
+        <div class="col-6">
+            <ul class="list-group">
+                {% for p in persons %}
+                    <li class="list-group-item">
+                        <a href="{% url 'persons_update' p.id %}">{{ p.first_name }}</a>
+                        <a href="{% url 'persons_delete' p.id %}">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <br>
+            <a href="{% url 'person_new' %}" class="btn btn-primary">Novo Cliente</a>
+        </div>
+        <div class="col">
+            {% if user.is_authenticated %}
+                <p>Ola {{ user.username }} <a href="{% url 'logout' %}" class="btn btn-info">Sair</a></p>
+            {% endif %}
+        </div>
+    </div>
 
-</body>
-</html>
+{% endblock %}
+
